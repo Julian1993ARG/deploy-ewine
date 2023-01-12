@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Container from 'react-bootstrap/Container'
 import React, { useRef, useState, useEffect } from 'react'
 import { IoIosWine } from 'react-icons/io'

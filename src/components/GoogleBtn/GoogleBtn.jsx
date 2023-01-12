@@ -3,8 +3,7 @@ import jwtdecode from 'jwt-decode'
 import Cookies from 'universal-cookie'
 import { useDispatch } from 'react-redux'
 import { loginUser, getFavorites } from '../../store/actions/actions'
-// const urlApi = 'http://localhost:3001'
-const urlApi = 'https://e-winespf.herokuapp.com'
+const urlApi = process.env.REACT_APP_URL_API
 
 export default function GoogleBtn () {
   const cookies = new Cookies()
@@ -12,11 +11,11 @@ export default function GoogleBtn () {
 
   function handleCallbackResponse (response) {
     const userObject = jwtdecode(response.credential)
-    fetch(`${urlApi}/users/email/` + userObject.email)
+    fetch(`${urlApi}users/email/` + userObject.email)
       .then(res => res.json())
       .then(data => {
         if (!data) {
-          fetch(`${urlApi}/users/`, {
+          fetch(`${urlApi}users/`, {
             method: 'POST',
             body: JSON.stringify({
               email: userObject.email,
@@ -36,7 +35,7 @@ export default function GoogleBtn () {
               console.log(data)
             })
         }
-        fetch(`${urlApi}/users/login`, {
+        fetch(`${urlApi}users/login`, {
           method: 'POST',
           body: JSON.stringify({
             email: userObject.email,

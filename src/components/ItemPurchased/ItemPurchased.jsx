@@ -6,14 +6,12 @@ import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import Button from 'react-bootstrap/esm/Button'
 import image from '../../utils/images/vector.jpg'
-import axios from 'axios'
+import { apiUrl } from '../../api'
 import { getUserBuys } from '../../store/actions/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import ModaleDetail from '../ModaleDetail/ModaleDetail'
 import DeliveryTracker from '../DeliveryTracker/DeliveryTracker'
 import { SocketContext } from '../../context/socket'
-const urlApi = 'https://e-winespf.herokuapp.com'
-// const urlApi = 'http://localhost:3001'
 
 export default function ItemPurchased ({ currency, totalAmount, paymentMethod, date, status, deliveryId, buyId, receiverId }) {
   const dispatch = useDispatch()
@@ -29,27 +27,11 @@ export default function ItemPurchased ({ currency, totalAmount, paymentMethod, d
   }
   return (
     <Row className='w-75 p-3 mb-0 border-bottom border-2 rounded-4 fs-4 mt-5'>
-      {/* <Row className='border-bottom mb-4'>
-        <Col className='text-start'>
-          Fecha: {date?.slice(0, 10)}
-        </Col>
-        <Col>
-          Id de compra: #{buyId}
-        </Col>
-      </Row> */}
       <Row>
         <Col className={s.image}>
           <img className='img-fluid' src={image} alt={image} />
         </Col>
         <Col className={s.dataContainer}>
-          {/* <Row>
-            <Col>
-              Metodo de pago:
-            </Col>
-            <Col>
-              {paymentMethod}
-            </Col>
-          </Row> */}
           <Row>
             <Col className={s.status}>
               Estado del envio:
@@ -81,11 +63,11 @@ export default function ItemPurchased ({ currency, totalAmount, paymentMethod, d
                     const data = {
                       status: 'RECIBIDO'
                     }
-                    const delivery = await axios.put(`${urlApi}/delivery/${deliveryId}`, data)
+                    const delivery = await apiUrl.put(`delivery/${deliveryId}`, data)
                     if (delivery) {
                       dispatch(getUserBuys(user.id))
                     }
-                    const res = await axios.get(`https://e-winespf.herokuapp.com/buyItems/buy/${buyId}`)
+                    const res = await apiUrl.get(`buyItems/buy/${buyId}`)
                     console.log(res)
                     socket.emit('receiveDelivery', {
                       senderName: user.username,

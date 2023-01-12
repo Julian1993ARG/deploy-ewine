@@ -9,14 +9,11 @@ import Form from 'react-bootstrap/Form'
 import s from './formEditUser.module.css'
 import { useFormik } from 'formik'
 import { schemaValidateChangesOfUser } from '../utilities/schemas'
-import axios from 'axios'
+import { apiUrl } from '../../api'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-// import Cookies from 'universal-cookie'
 
 export default function FormEditUser () {
-  // const urlApi = 'http://localhost:3001'
-  const urlApi = 'https://e-winespf.herokuapp.com'
   const user = useSelector(state => state.user)
 
   const { handleChange, handleSubmit, handleBlur, touched, errors, values } = useFormik({
@@ -32,7 +29,7 @@ export default function FormEditUser () {
         password2: values.newPassword
       }
       try {
-        const response = await axios.put(`${urlApi}/users/${user.id}`, data)
+        const response = await apiUrl.put(`users/${user.id}`, data)
         console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)

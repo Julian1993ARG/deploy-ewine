@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import style from './ChatOnline.module.css'
-import axios from 'axios'
-// const urlApi = 'http://localhost:3001'
-const urlApi = 'https://e-winespf.herokuapp.com'
+import { apiUrl } from '../../api'
 
 function ChatOnline ({ onlineUsers, currentId, setCurrentChat, conversations, setConversations, socket }) {
   const [users, setUsers] = useState([])
-
+  console.log(apiUrl)
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axios.get(`${urlApi}/users/filter/${currentId}`)
+        const res = await apiUrl.get(`users/filter/${currentId}`)
         setUsers(res.data)
       } catch (error) {
         console.log(error.message)
@@ -36,7 +34,7 @@ function ChatOnline ({ onlineUsers, currentId, setCurrentChat, conversations, se
 
   const handleClick = async (user) => {
     try {
-      const res = await axios.get(`${urlApi}/conversations/find/${currentId}/${user.id}`)
+      const res = await apiUrl.get(`conversations/find/${currentId}/${user.id}`)
       console.log(res.data)
       setCurrentChat(res.data)
 

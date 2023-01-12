@@ -1,11 +1,9 @@
-import axios from 'axios'
-const urlApi = 'https://e-winespf.herokuapp.com'
-// const urlApi = 'http://localhost:3001'
+import { apiUrl } from '../../api'
 
 export function getPublications () {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/publications`)
+      const api = await apiUrl.get('publications')
       return dispatch({
         type: 'GET_PUBLICATIONS',
         payload: api.data
@@ -19,7 +17,7 @@ export function getPublications () {
 export function getByPublication (id) {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/publications/${id}`)
+      const api = await apiUrl.get(`publications/${id}`)
       return dispatch({
         type: 'GET_BY_ID_PUBLICATION',
         payload: api.data
@@ -32,7 +30,7 @@ export function getByPublication (id) {
 export const getPublicationsAdm = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/publications/all`)
+      const res = await apiUrl.get('publications/all')
 
       return dispatch({
         type: 'GET_PUBLICATIONS_ALL',
@@ -48,7 +46,7 @@ export const bannedPublication = (id, isBanned) => {
     try {
       console.log(isBanned)
       console.log('Llegue')
-      const res = await axios.put(`${urlApi}/publications/${id}?banned=${!isBanned}`)
+      const res = await apiUrl.put(`publications/${id}?banned=${!isBanned}`)
       console.log(res)
       return dispatch({
         type: 'GET_PUBLICATION_BANNED',
@@ -63,7 +61,7 @@ export const bannedPublication = (id, isBanned) => {
 export function postPublication (data, token) {
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/publications`, data)
+      const api = await apiUrl.post('publications', data)
       return dispatch({
         type: 'POST_PUBLICATION',
         Headers: { 'content-type': 'application/json' },
@@ -79,7 +77,7 @@ export function postPublication (data, token) {
 export function getProducts () {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/products`)
+      const api = await apiUrl.get('products')
       return dispatch({
         type: 'GET_PRODUCTS',
         payload: api.data
@@ -93,7 +91,7 @@ export function getProducts () {
 export function getByIdProduct (id) {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/products/${id}`)
+      const api = await apiUrl.get(`products/${id}`)
       return dispatch({
         type: 'GET_BY_ID_PRODUCT',
         payload: api.data
@@ -107,7 +105,7 @@ export function getByIdProduct (id) {
 export function postProduct (data) {
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/products`, data)
+      const api = await apiUrl.post('products', data)
       return dispatch({
         type: 'POST_PRODUCT',
         payload: api.data
@@ -121,8 +119,7 @@ export function postProduct (data) {
 // pending
 export const searchByNameProduct = (name) => {
   return async function (dispatch) {
-    return fetch(`${urlApi}/products?name=${name}`)
-      .then((respuesta) => respuesta.json())
+    return apiUrl.get(`products?name=${name}`)
       .then((infoProductName) => {
         dispatch({ type: 'SEARCH_PRODUCT_BY_NAME', payload: infoProductName })
       })
@@ -133,7 +130,7 @@ export const searchByNameProduct = (name) => {
 export const filterPublications = ({ varietal, type, origin, opt }) => {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`${urlApi}/publications/filter?varietal=${varietal}&type=${type}&origin=${origin}&opt=${opt}`)
+      const { data } = await apiUrl.get(`publications/filter?varietal=${varietal}&type=${type}&origin=${origin}&opt=${opt}`)
       return dispatch({
         type: 'FILTER_PUBLICATIONS',
         payload: data
@@ -151,11 +148,10 @@ export const clearFilter = () => {
 
 export const searchPublicationByName = (name) => {
   return async function (dispatch) {
-    return fetch(`${urlApi}/publications?name=${name}`).then((respuesta) =>
-      respuesta.json().then((dataP) => {
+    return apiUrl.get(`publications?name=${name}`)
+      .then((dataP) => {
         dispatch({ type: 'GET_PUBLICATIONS', payload: dataP })
       })
-    )
   }
 }
 
@@ -164,7 +160,7 @@ export const searchPublicationByName = (name) => {
 export const getProductsReviews = () => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/reviews/products`)
+      const api = await apiUrl.get('reviews/products')
       return dispatch({
         type: 'GET_PRODUCTS_REVIEWS',
         payload: api.data
@@ -184,7 +180,7 @@ export const postReview = (userId, productId, text) => {
       text
     }
     try {
-      const api = await axios.post(`${urlApi}/reviews`, data)
+      const api = await apiUrl.post('reviews', data)
       return dispatch({
         type: 'POST_REVIEW',
         payload: api.data
@@ -199,7 +195,7 @@ export const postReview = (userId, productId, text) => {
 export const getFavorites = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/favorites/${id}`)
+      const api = await apiUrl.get(`favorites/${id}`)
       return dispatch({
         type: 'GET_FAVORITES_ID',
         payload: api.data
@@ -213,8 +209,8 @@ export const getFavorites = (id) => {
 export const getPublicationsUserFavorites = (ids) => {
 //   return async function (dispatch) {
 //     try {
-//       // const publications = ids.map(async (idP) => await axios.get(`${urlApi}/favorites/${idP}`))
-//       // const api = await axios.get(`${urlApi}/favorites/${id}`)
+//       // const publications = ids.map(async (idP) => await apiUrl.get(`favorites/${idP}`))
+//       // const api = await apiUrl.get(`favorites/${id}`)
 //       return dispatch({
 //         type: 'GET_PUBLICATIONS_USERFAVORITES',
 //         payload: api.data
@@ -228,7 +224,7 @@ export const getPublicationsUserFavorites = (ids) => {
 export const removePublicationsUserFavorites = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/favorites/${id}`)
+      const api = await apiUrl.get(`favorites/${id}`)
       return dispatch({
         type: 'REMOVE_PUBLICATIONS_USERFAVORITES',
         payload: api.data
@@ -242,7 +238,7 @@ export const removePublicationsUserFavorites = (id) => {
 export const addFavorites = (data) => {
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/favorites`, data)
+      const api = await apiUrl.post('favorites', data)
       return dispatch({
         type: 'ADD_FAVORITE',
         payload: api.data
@@ -257,7 +253,7 @@ export const addFavorites = (data) => {
 export const removeFavorites = (userId, publicationId) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/favorites/delete/${userId}?publicationId=${publicationId}`)
+      const api = await apiUrl.get(`favorites/delete/${userId}?publicationId=${publicationId}`)
       return dispatch({
         type: 'REMOVE_FAVORITE',
         payload: api.data
@@ -298,7 +294,7 @@ export const getRecomendedPublications = (type, varietal, origin) => {
   return async function (dispatch) {
     try {
       console.log(type, varietal, origin)
-      const recPub = await axios(`${urlApi}/publications/filter?type=${type || null}&varietal=${varietal || null}&origin=${origin || null}`)
+      const recPub = await apiUrl(`publications/filter?type=${type || null}&varietal=${varietal || null}&origin=${origin || null}`)
       console.log(recPub)
       return dispatch({
         type: 'RECOMENDED_PUBLICATIONS',
@@ -328,7 +324,7 @@ export const logoutUser = () => {
 export const getUsers = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/users`)
+      const res = await apiUrl.get('users')
       console.log(res.data)
 
       return dispatch({
@@ -344,7 +340,7 @@ export const getUsers = () => {
 export const bannedUser = (id, isBanned) => {
   return async function (dispatch) {
     try {
-      const res = await axios.put(`${urlApi}/users/${id}?banned=${!isBanned}`)
+      const res = await apiUrl.put(`users/${id}?banned=${!isBanned}`)
       return dispatch({
         type: 'GET_USER_BANNED',
         payload: res.data
@@ -357,7 +353,7 @@ export const bannedUser = (id, isBanned) => {
 export const sommelierUser = (id, isSommelier) => {
   return async function (dispatch) {
     try {
-      const res = await axios.put(`${urlApi}/users/${id}?sommelier=${!isSommelier}`)
+      const res = await apiUrl.put(`users/${id}?sommelier=${!isSommelier}`)
 
       return dispatch({
         type: 'GET_USER_SOMMELIER',
@@ -371,7 +367,7 @@ export const sommelierUser = (id, isSommelier) => {
 export const usersByProvinces = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/users/provinces`)
+      const res = await apiUrl.get('users/provinces')
       console.log('esta es la respuesta de la API para las provincias', res)
       return dispatch({
         type: 'GET_USER_PROVINCES',
@@ -387,7 +383,7 @@ export const usersByProvinces = () => {
 export const postStripe = (idStripe, totalAmount, carrito, userId) => {
   return async function (dispatch) {
     try {
-      const res = await axios.post(`${urlApi}/stripe`, {
+      const res = await apiUrl.post('stripe', {
         idStripe,
         totalAmount,
         carrito,
@@ -413,7 +409,7 @@ export const postStripe = (idStripe, totalAmount, carrito, userId) => {
 export const getQuestions = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/questions/${id}`)
+      const api = await apiUrl.get(`questions/${id}`)
       return dispatch({
         type: 'GET_QUESTIONS',
         payload: api.data
@@ -427,7 +423,7 @@ export const getQuestions = (id) => {
 export const addQuestion = (data) => {
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/questions`, data)
+      const api = await apiUrl.post('questions', data)
       return dispatch({
         type: 'ADD_QUESTION',
         payload: api.data
@@ -442,7 +438,7 @@ export const addQuestion = (data) => {
 export const addAnswer = (data, id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/questions/answer/${id}`, data)
+      const api = await apiUrl.post(`questions/answer/${id}`, data)
       return dispatch({
         type: 'ADD_QUESTION',
         payload: api.data
@@ -464,7 +460,7 @@ export const modalRender = () => {
 export const getUserBuys = (userId) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/buys/user/${userId}`)
+      const res = await apiUrl.get(`buys/user/${userId}`)
       return dispatch({
         type: 'GET_USER_BUYS',
         payload: res.data
@@ -478,7 +474,7 @@ export const getUserBuys = (userId) => {
 export const getBuys = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/buys`)
+      const res = await apiUrl.get('buys')
       return dispatch({
         type: 'GET_ALL_BUYS',
         payload: res.data
@@ -493,7 +489,7 @@ export const getBuys = () => {
 export const getVarietals = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/varietals`)
+      const res = await apiUrl.get('varietals')
       console.log(res.data)
       return dispatch({
         type: 'GET_ALL_VARIETALS',
@@ -511,7 +507,7 @@ export function postVarietals (name, description) {
   }
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/varietals`, data)
+      const api = await apiUrl.post('varietals', data)
       return dispatch({
         type: 'POST_VARIETALS',
         payload: api.data
@@ -526,7 +522,7 @@ export function postVarietals (name, description) {
 export const getUserSales = (userId) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/buys/user/sales/${userId}`)
+      const res = await apiUrl.get(`buys/user/sales/${userId}`)
       return dispatch({
         type: 'GET_USER_SALES',
         payload: res.data
@@ -541,7 +537,7 @@ export const getUserSales = (userId) => {
 export const getItemsDetails = (buyId) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/buyItems/buy/${buyId}`)
+      const res = await apiUrl.get(`buyItems/buy/${buyId}`)
       console.log(res.data)
       return dispatch({
         type: 'GET_ITEMS_DETAIL',
@@ -560,7 +556,7 @@ export const deliveryStatus = (deliveryId, status) => {
       status
     }
     try {
-      const res = await axios.put(`${urlApi}/delivery/${deliveryId}`, data)
+      const res = await apiUrl.put(`delivery/${deliveryId}`, data)
       return dispatch({
         type: 'GET_DELIVERY_STATUS',
         payload: res.data
@@ -577,7 +573,7 @@ export const addReviewBuy = (data) => {
   console.log(data)
   return async function (dispatch) {
     try {
-      const api = await axios.post(`${urlApi}/reviewsBuys`, data)
+      const api = await apiUrl.post('reviewsBuys', data)
 
       return dispatch({
         type: 'ADD_REVIEWBUY',
@@ -591,7 +587,7 @@ export const addReviewBuy = (data) => {
 export const getPuntaje = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/reviewsBuys/${id}`)
+      const api = await apiUrl.get(`reviewsBuys/${id}`)
       return dispatch({
         type: 'GET_REVIEWBUY_ID',
         payload: api.data
@@ -605,7 +601,7 @@ export const getPuntaje = (id) => {
 export const getReviewPublication = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/reviewsBuys/reviewsDetail/${id}`)
+      const api = await apiUrl.get(`reviewsBuys/reviewsDetail/${id}`)
       return dispatch({
         type: 'GET_REVIEWBUYS_ID',
         payload: api.data
@@ -618,7 +614,7 @@ export const getReviewPublication = (id) => {
 export const getReviewByUser = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/reviewsBuys/reviewsUser/${id}`)
+      const api = await apiUrl.get(`reviewsBuys/reviewsUser/${id}`)
       return dispatch({
         type: 'GET_REVIEW_BYUSER',
         payload: api.data
@@ -637,7 +633,7 @@ export const updateProfileImage = (id, url) => {
       url
     }
     try {
-      const api = await axios.put(`${urlApi}/users/${id}/image-upload`, data)
+      const api = await apiUrl.put(`users/${id}/image-upload`, data)
       return dispatch({
         type: 'UPDATE_PROFILE_PICTURE',
         payload: api.data
@@ -651,7 +647,7 @@ export const updateProfileImage = (id, url) => {
 export const adminUser = (id, isAdmin) => {
   return async function (dispatch) {
     try {
-      const res = await axios.put(`${urlApi}/users/${id}?admin=${!isAdmin}`)
+      const res = await apiUrl.put(`users/${id}?admin=${!isAdmin}`)
 
       return dispatch({
         type: 'GET_USER_ADMIN',
@@ -666,7 +662,7 @@ export const adminUser = (id, isAdmin) => {
 export const getUserById = (id) => {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/users/${id}`)
+      const api = await apiUrl.get(`users/${id}`)
       return dispatch({
         type: 'GET_USERBY_ID',
         payload: api.data
@@ -700,7 +696,7 @@ export const setOnlineUsers = (users) => {
 export const popularProducts = () => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/buyItems/productsCount`)
+      const res = await apiUrl.get('buyItems/productsCount')
       console.log('esta es la respuesta de la API para los productos mas vendidos', res)
       return dispatch({
         type: 'GET_POPULAR_PRODUCTS',
@@ -715,7 +711,7 @@ export const popularProducts = () => {
 export const reviewsPublication = (productId) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`${urlApi}/reviews/${productId}`)
+      const res = await apiUrl.get(`reviews/${productId}`)
       return dispatch({
         type: 'REVIEWS_PUBLICATIONS',
         payload: res.data
@@ -729,7 +725,7 @@ export const reviewsPublication = (productId) => {
 export function getReviewsAdmin () {
   return async function (dispatch) {
     try {
-      const api = await axios.get(`${urlApi}/reviews/productsLanding`)
+      const api = await apiUrl.get('reviews/productsLanding')
       console.log('Efectivamente son las reseñas', api.data)
       return dispatch({
         type: 'GET_REVIEWS',

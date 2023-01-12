@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import ChatOnline from '../ChatOnline/ChatOnline'
 import Conversations from '../Conversations/Conversations'
 import ItemConversation from '../ItemConversation/ItemConversation'
 import style from './Messenger.module.css'
-import axios from 'axios'
+import { apiUrl } from '../../api'
 import SidebarMessenger from '../SidebarMessenger/SidebarMessenger'
 import { BsFillChatDotsFill } from 'react-icons/bs'
 import { FiSend } from 'react-icons/fi'
@@ -24,11 +25,6 @@ function Messenger () {
   const [arrivalMessage, setArrivalMessage] = useState(null)
   /* const [onlineUsers, setOnlineUsers] = useState([]) */
   const onlineUsers = useSelector(state => state.onlineUsers)
-
-  /*   useEffect(() => {
-    /* socket.current = io('https://websocketpf.herokuapp.com/')
-    socket.current = io('http://localhost:8900')
-  }, [socket]) */
 
   useEffect(() => {
     socket.on('getMessage', data => {
@@ -57,7 +53,7 @@ function Messenger () {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(`https://e-winespf.herokuapp.com/conversations/user/${user.id}`)
+        const res = await apiUrl.get(`conversations/user/${user.id}`)
         setConversations(res.data)
       } catch (error) {
         console.log(error)
@@ -70,7 +66,7 @@ function Messenger () {
     const getMessages = async () => {
       try {
         if (currentChat) {
-          const res = await axios.get(`https://e-winespf.herokuapp.com/messages/${currentChat.id}`)
+          const res = await apiUrl.get(`messages/${currentChat.id}`)
           setMessages(res.data)
         }
       } catch (error) {
@@ -97,7 +93,7 @@ function Messenger () {
     })
 
     try {
-      const res = await axios.post('https://e-winespf.herokuapp.com/messages', message)
+      const res = await apiUrl.post('messages', message)
       setMessages([...messages, res.data])
       setNewMessage('')
     } catch (error) {

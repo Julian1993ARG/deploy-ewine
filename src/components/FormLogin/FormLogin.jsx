@@ -14,17 +14,16 @@ export default function FormLogin () {
 
   const dispatch = useDispatch()
   const userLogged = useSelector(state => state.user)
-  // const urlApi = 'http://localhost:3001'
-  const urlApi = 'https://e-winespf.herokuapp.com'
+  const urlApi = process.env.REACT_APP_URL_API
 
   function handleCallbackResponse (response) {
     const userObject = jwtdecode(response.credential)
     console.log(userObject)
-    fetch(`${urlApi}/users/email/` + userObject.email)
+    fetch(`${urlApi}users/email/` + userObject.email)
       .then(res => res.json())
       .then(data => {
         if (!data) {
-          fetch(`${urlApi}/users/`, {
+          fetch(`${urlApi}users/`, {
             method: 'POST',
             body: JSON.stringify({
               email: userObject.email,
@@ -44,7 +43,7 @@ export default function FormLogin () {
               console.log(data)
             })
         }
-        fetch(`${urlApi}/users/login`, {
+        fetch(`${urlApi}users/login`, {
           method: 'POST',
           body: JSON.stringify({
             email: userObject.email,
@@ -102,7 +101,7 @@ export default function FormLogin () {
     onSubmit: async (values, { resetForm }) => {
       setSend(true)
       if (!user) {
-        fetch(`${urlApi}/users/login`, {
+        fetch(`${urlApi}users/login`, {
           method: 'POST',
           body: JSON.stringify({
             email: values.email,

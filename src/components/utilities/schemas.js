@@ -1,16 +1,9 @@
-import axios from 'axios'
+import { apiUrl } from '../../api'
 import * as Yup from 'yup'
 import { types, provinces, varietales } from './data'
 
 const startWichLetter = /^[^0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][a-zA-Z0-9$-?¿¡!%.,\s]*$/gi // eslint-disable-line
 const passwordValidate = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/gm
-// at least 8 characters
-// - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
-// - Can contain special characters
-// const urlApi = 'https://e-winespf.herokuapp.com'
-const urlApi = 'http://localhost:3001'
-// http:///users/email/:email
-// users/username/:username
 
 export const schemaFormPubli = Yup.object().shape({
   title: Yup.string().required('Es Requerido').matches(startWichLetter, 'Debe comenzar con una letra').min(3, 'Min 3 caracteres').max(50, 'Max 50 caracteres'),
@@ -46,7 +39,7 @@ export const schemaValidateUser = Yup.object().shape({
     .test('testEmail', 'Este usuario ya existe',
       value => {
         return new Promise((resolve, reject) => {
-          axios.get(`${urlApi}/users/username/${value}`)
+          apiUrl.get(`users/username/${value}`)
             .then(res => {
               resolve(true)
             })
@@ -61,7 +54,7 @@ export const schemaValidateUser = Yup.object().shape({
     .test('testEmail', 'Este correo ya existe',
       value => {
         return new Promise((resolve, reject) => {
-          axios.get(`${urlApi}/users/email/${value}`)
+          apiUrl.get(`users/email/${value}`)
             .then(res => {
               resolve(true)
             })
@@ -85,7 +78,7 @@ export const schemaValidateEmail = Yup.object().shape({
     .test('testEmail', 'Este correo no existe como cuenta',
       value => {
         return new Promise((resolve, reject) => {
-          axios.get(`${urlApi}/users/email/${value}`)
+          apiUrl.get(`users/email/${value}`)
             .then(res => {
               resolve(false)
             })
@@ -136,8 +129,8 @@ export const schemaUrl = Yup.object().shape({
 // CLOUDINARY FUNCTION UPLOAD AN IMG
 export const uplodCloudinary = async (file) => {
   try {
-    const cloudName = 'dfq27ytd2'
-    const preset = 'cpnushlf'
+    const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
+    const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`
 
     const formData = new FormData()

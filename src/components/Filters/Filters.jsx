@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react'
 import { types, varietales, provinces } from '../utilities/data.js'
 import { useDispatch } from 'react-redux'
@@ -25,11 +26,11 @@ function Filters ({ setPage }) {
   }
 
   return (
-    <div class={`dropdown ${s.general}`}>
-      <a class={`dropdown-toggle px-5 py-2 ${s.filtros}`} href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+    <div className={`dropdown ${s.general}`}>
+      <a className={`dropdown-toggle px-5 py-2 ${s.filtros}`} href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
         Filtros
       </a>
-      <ul class='dropdown-menu fs-4'>
+      <ul className='dropdown-menu fs-4'>
         <li>
           <select className={s.optSelect} name='opt' onChange={e => handleSort(e)}>
             <option value='' id='opt'> Ordernar </option>

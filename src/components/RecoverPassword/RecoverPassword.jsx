@@ -5,13 +5,10 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useFormik } from 'formik'
 import { schemaValidatePasswordEmail } from '../utilities/schemas'
-import axios from 'axios'
+import { apiUrl } from '../../api'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import s from './recoverPassword.module.css'
-// import Cookies from 'universal-cookie'
-const urlApi = 'https://e-winespf.herokuapp.com'
-// const urlApi = 'http://localhost:3001'
 
 export default function RecoverPassword () {
   const user = useSelector(state => state.user)
@@ -24,7 +21,7 @@ export default function RecoverPassword () {
     validationSchema: schemaValidatePasswordEmail,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.put(`${urlApi}/users/${user.email}`)
+        const response = await apiUrl.put(`users/${user.email}`)
         console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)
@@ -90,14 +87,6 @@ export default function RecoverPassword () {
                 Enviar
               </Button>
             </Row>
-            {/* <Button
-                  className='w-50 p-3 fs-4'
-                  style={{ backgroundColor: '#91091E', border: 'none' }}
-                  type='submit'
-                  onSubmit={handleSubmit}
-                >
-                  Enviar
-                </Button> */}
           </Form>
         </Col>
       </Container>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import style from './home.module.css'
 import { useEffect, useState, useContext } from 'react'
 import { getPublications, getProducts, addNotification, setOnlineUsers } from '../../store/actions/actions'

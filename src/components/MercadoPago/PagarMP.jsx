@@ -6,8 +6,7 @@ import { clearCarrito } from '../../store/actions/actions'
 import { SocketContext } from '../../context/socket'
 import { useContext } from 'react'
 
-const urlApi = 'https://e-winespf.herokuapp.com'
-// const urlApi = 'http://localhost:3001'
+const urlApi = process.env.REACT_APP_URL_API
 
 export default function PagarMP () {
   const carrito = useSelector(state => state.carrito)
@@ -34,7 +33,7 @@ export default function PagarMP () {
         id: user.user.id
       }
     })
-    fetch(`${urlApi}/checkout`, {
+    fetch(`${urlApi}checkout`, {
       method: 'POST',
       body: JSON.stringify(buying),
       headers: {

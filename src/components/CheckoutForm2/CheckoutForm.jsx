@@ -56,11 +56,8 @@
 //     setIsLoading(true)
 
 //     const { error } = await stripe.confirmPayment({
-//       elements,
-//       confirmParams: {
-//         // Make sure to change this to your payment completion page
-//         return_url: 'http://localhost:3000'
-//       }
+
+//      }
 //     })
 
 //     // This point will only be reached if there is an immediate error when

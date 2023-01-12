@@ -2,11 +2,8 @@ import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import { schemaValidateUser } from '../utilities/schemas'
 import { provinces } from '../utilities/data'
-import axios from 'axios'
 import { useState } from 'react'
-
-// const urlApi = 'http://localhost:3001'
-const urlApi = 'https://e-winespf.herokuapp.com'
+import { apiUrl } from '../../api'
 
 export default function FormLogin () {
   const dispatch = useDispatch() //eslint-disable-line
@@ -21,7 +18,7 @@ export default function FormLogin () {
     validationSchema: schemaValidateUser,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post(`${urlApi}/users`, values)
+        const response = await apiUrl.post('users', values)
         console.log(response)
         resetForm()
         setSend(true)

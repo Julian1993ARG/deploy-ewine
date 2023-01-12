@@ -5,15 +5,11 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useFormik } from 'formik'
 import { schemaValidateEmail } from '../utilities/schemas'
-import axios from 'axios'
 import { useState } from 'react'
 import s from './forgotPassword.module.css'
-// import Cookies from 'universal-cookie'
+import { apiUrl } from '../../api'
 
 export default function FormForgotPassword () {
-  const urlApi = 'https://e-winespf.herokuapp.com'
-  // const urlApi = 'http://localhost:3001'
-
   const { handleChange, handleSubmit, handleBlur, touched, errors, values } = useFormik({
     initialValues: {
       email: ''
@@ -22,7 +18,7 @@ export default function FormForgotPassword () {
     onSubmit: async (values, { resetForm }) => {
       try {
         console.log(values)
-        const response = await axios.post(`${urlApi}/users/forgotPassword`, values)
+        const response = await apiUrl.post('users/forgotPassword', values)
         console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)
@@ -74,14 +70,6 @@ export default function FormForgotPassword () {
                 Enviar
               </Button>
             </Row>
-            {/* <Button
-                  className='w-50 p-3 fs-4'
-                  style={{ backgroundColor: '#91091E', border: 'none' }}
-                  type='submit'
-                  onSubmit={handleSubmit}
-                >
-                  Enviar
-                </Button> */}
           </Form>
         </Col>
       </Container>

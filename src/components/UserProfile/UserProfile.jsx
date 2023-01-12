@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Container from 'react-bootstrap/esm/Container'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
@@ -25,8 +26,8 @@ export default function UserProfile () {
     })
     reader.readAsDataURL(e.target.files[0])
 
-    const cloudName = 'dfq27ytd2'
-    const preset = 'cpnushlf'
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME
+    const preset = process.env.CLOUDINARY_UPLOAD_PRESET
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`
 
     const formData = new FormData()

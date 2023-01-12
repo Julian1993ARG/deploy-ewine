@@ -10,10 +10,7 @@ import { MdNotifications } from 'react-icons/md'
 import { BsFillChatFill } from 'react-icons/bs'
 import { RiAdminFill } from 'react-icons/ri'
 import { GiHamburgerMenu } from 'react-icons/gi'
-// import { useEffect } from 'react'
-// import SeachBar from '../SearchBar/SearchBar'
 
-// import { showModal } from '../../store/actions/actions'
 import { io } from 'socket.io-client'
 import { useEffect, useRef, useState } from 'react'
 import { clearNotifications } from '../../store/actions/actions'
@@ -26,8 +23,7 @@ export default function Nav () {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
-    /* socket.current = io('https://websocketpf.herokuapp.com/') */
-    socket.current = io('http://localhost:8900')
+    socket.current = io(process.env.REACT_APP_WEBSOCKET_URL)
   }, [])
 
   const displayNotifications = (data) => {
@@ -108,16 +104,10 @@ export default function Nav () {
           <div className='navbar-nav ms-auto me-2 mb-2 mb-lg-0'>
             <Navegador link='/' span='Inicio' className='nav-link' />
 
-            <Navegador link='/about' span='Sobre E-Wine' className='nav-link' />
+            {/* <Navegador link='/about' span='Sobre E-Wine' className='nav-link' /> */}
 
             <Navegador link='/home' span='Tienda' className='nav-link' />
 
-            {/* {user
-              ? <Link to='/messenger' className={style.messenger}>
-                <BsFillChatFill />
-            </Link> //eslint-disable-line
-              : null} */}
-            {/* <FormLogin /> */}
             {user &&
               <Navegador link='/createPublication' span='Crear Publicación' className='nav-link' />}
             <Modale

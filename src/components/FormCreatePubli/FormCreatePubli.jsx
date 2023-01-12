@@ -38,8 +38,8 @@ export default function FormCreatePubli () {
       if (typeof token === 'undefined') {
         history.push('/register')
       }
-      const cloudName = 'dfq27ytd2'
-      const preset = 'cpnushlf'
+      const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
+      const preset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
       const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`
 
       const formData = new FormData()
