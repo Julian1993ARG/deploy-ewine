@@ -29,6 +29,9 @@ import UserSales from './components/UserSales/UserSales'
 import SommelierReviews from './components/SommelierReviews/SommelierReviews'
 import { fakerData } from './data'
 import Cookies from 'universal-cookie'
+import ReactGA from 'react-ga4'
+
+const googleAnalyticsId = process.env.GA_TRACKING_ID || ''
 
 function App () {
   const cookies = new Cookies()
@@ -36,6 +39,7 @@ function App () {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    ReactGA.initialize(googleAnalyticsId)
     for (let x = 0; x < window.localStorage.length; x++) {
       const id = window.localStorage.key(x)
       dispatch(addCarrito({
