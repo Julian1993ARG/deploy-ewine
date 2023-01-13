@@ -31,7 +31,7 @@ import { fakerData } from './data'
 import Cookies from 'universal-cookie'
 import ReactGA from 'react-ga4'
 
-const googleAnalyticsId = process.env.GA_TRACKING_ID || ''
+const googleAnalyticsId = process.env.REACT_APP_GA_TRACKING_ID || ''
 
 function App () {
   const cookies = new Cookies()
