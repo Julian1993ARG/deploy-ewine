@@ -2,8 +2,8 @@ import { apiUrl } from '../api'
 import { fakerProducts, fakerPublications } from './'
 
 const cant = {
-  products: 0,
-  publications: 15
+  products: 30,
+  publications: 120
 }
 
 const fakerData = async () => {

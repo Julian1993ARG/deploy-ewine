@@ -28,11 +28,6 @@ export default function Card ({ id, title, name, image, price, userId, stock, co
     dispatch(addCarrito({ id, price, title, image, name, count: 1, stock: count }))
   }
 
-  /* const addToFavorites = (id, price, title, image, name) => {
-    window.localStorage.setItem(id, JSON.stringify({ price, title, image, name }))
-    dispatch(addFavorites({ id, price, title, image, name }))
-  } */
-
   const removeFromCarrito = (id) => {
     window.localStorage.removeItem(id)
     dispatch(removeCarrito(id))
@@ -73,7 +68,7 @@ export default function Card ({ id, title, name, image, price, userId, stock, co
         <div className={`card-text ${style.infoContainer}`}>
           <h3 className={`card-title ${style.title}`}>{title}</h3>
           <div className={style.namePrice}>
-            <h4 className={style.name}>{name}</h4>
+            {/* <h4 className={style.name}>{name}</h4> */}
             <h4 className={style.price}>${price.toLocaleString('MX')}</h4>
           </div>
           <div className={` ${style.btnContainer}`}>
@@ -84,7 +79,6 @@ export default function Card ({ id, title, name, image, price, userId, stock, co
               }}
             >Más Info
             </Link>
-            {console.log(stock, 'count')}
             {(user.id !== userId && stock)
               ? <button
                   className={`${style.addBtn}`} onClick={() => {
