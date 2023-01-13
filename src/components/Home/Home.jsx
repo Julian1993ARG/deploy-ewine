@@ -37,23 +37,18 @@ export default function Home () {
 
   useEffect(() => {
     socket.on('getFavorite', data => {
-      console.log(data)
       dispatch(addNotification(data))
     })
     socket.on('getQuestion', data => {
-      console.log(data)
       dispatch(addNotification(data))
     })
     socket.on('getBuy', data => {
-      console.log(data)
       dispatch(addNotification(data))
     })
     socket.on('getSendDelivery', data => {
-      console.log(data)
       dispatch(addNotification(data))
     })
     socket.on('getReceiveDelivery', data => {
-      console.log(data)
       dispatch(addNotification(data))
     })
   }, [dispatch, socket])
@@ -69,8 +64,6 @@ export default function Home () {
     dispatch(getProducts())
     dispatch(getPublications())
   }, [dispatch])
-  // console.log(products)
-  // console.log(publications)
 
   const pages = []
   for (let i = 1; i <= Math.ceil(publications.length / productsPerPage); i++) {

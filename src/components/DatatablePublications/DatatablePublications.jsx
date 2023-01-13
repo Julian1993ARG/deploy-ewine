@@ -43,8 +43,6 @@ export default function Datatable (props) {
   const rows = publications.map(p => { return { id: p.id, title: p.title, name: p.name, type: p.type, varietal: p.varietal, description: p.description, origin: p.origin, isBanned: p.isBanned } }
   )
   const handleBanned = (id, isBanned) => {
-    console.log('Entre al handleBanned')
-    console.log(id)
     if (!token) {
       history.push('/')
     } else {
@@ -56,7 +54,6 @@ export default function Datatable (props) {
     headerName: 'Action',
     width: 900,
     renderCell: (params) => {
-      // console.log(params)
       return (
         <div className='w'>
           <button type='button' className='btn btn-outline-danger' onClick={() => handleBanned(params.row.id, params.row.isBanned)}>

@@ -30,7 +30,6 @@ export default function FormEditUser () {
       }
       try {
         const response = await apiUrl.put(`users/${user.id}`, data)
-        console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)
           setError(true)

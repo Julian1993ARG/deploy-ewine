@@ -39,7 +39,6 @@ export default function UserProfile () {
         'Content-Type': 'multipart/form-data'
       }
     })
-    console.log(send)
     const urlImage = send.data.secure_url
     dispatch(updateProfileImage(user.id, urlImage))
   }

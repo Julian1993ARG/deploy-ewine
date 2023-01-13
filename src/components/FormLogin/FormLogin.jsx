@@ -18,7 +18,6 @@ export default function FormLogin () {
 
   function handleCallbackResponse (response) {
     const userObject = jwtdecode(response.credential)
-    console.log(userObject)
     fetch(`${urlApi}users/email/` + userObject.email)
       .then(res => res.json())
       .then(data => {
@@ -39,9 +38,6 @@ export default function FormLogin () {
           })
 
             .then((res) => res.json())
-            .then((data) => {
-              console.log(data)
-            })
         }
         fetch(`${urlApi}users/login`, {
           method: 'POST',
@@ -115,7 +111,6 @@ export default function FormLogin () {
 
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
             if (typeof data !== 'string') {
               cookies.set('TOKEN', data, {
                 path: '/'

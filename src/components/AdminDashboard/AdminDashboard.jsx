@@ -83,8 +83,6 @@ function AdminDashboard () {
     return arrayB.length
   }
   useEffect(() => {
-    console.log(token)
-    console.log('Este es el token de isAdmimn', token.user.isAdmin)
     !token.user.isAdmin && history.push('/')
   }, [])//eslint-disable-line
 

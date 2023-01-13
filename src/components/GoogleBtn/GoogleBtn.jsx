@@ -29,11 +29,6 @@ export default function GoogleBtn () {
             },
             credentials: 'include'
           })
-
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data)
-            })
         }
         fetch(`${urlApi}users/login`, {
           method: 'POST',

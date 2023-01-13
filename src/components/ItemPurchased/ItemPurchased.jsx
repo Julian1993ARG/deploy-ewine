@@ -16,7 +16,6 @@ import { SocketContext } from '../../context/socket'
 export default function ItemPurchased ({ currency, totalAmount, paymentMethod, date, status, deliveryId, buyId, receiverId }) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
-  console.log(date)
 
   const socket = useContext(SocketContext)
   const TotalCompra = () => {
@@ -68,7 +67,6 @@ export default function ItemPurchased ({ currency, totalAmount, paymentMethod, d
                       dispatch(getUserBuys(user.id))
                     }
                     const res = await apiUrl.get(`buyItems/buy/${buyId}`)
-                    console.log(res)
                     socket.emit('receiveDelivery', {
                       senderName: user.username,
                       receiverId: res.data[0].sellerId

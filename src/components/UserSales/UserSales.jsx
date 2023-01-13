@@ -14,7 +14,6 @@ export default function UserSales () {
   const dispatch = useDispatch()
   const sales = useSelector(state => state.sales)
   const user = useSelector(state => state.user)
-  console.log(sales)
   useEffect(() => {
     dispatch(getUserSales(user.id))
   }, [dispatch])

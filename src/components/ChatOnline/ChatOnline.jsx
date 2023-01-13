@@ -4,7 +4,6 @@ import { apiUrl } from '../../api'
 
 function ChatOnline ({ onlineUsers, currentId, setCurrentChat, conversations, setConversations, socket }) {
   const [users, setUsers] = useState([])
-  console.log(apiUrl)
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -35,7 +34,6 @@ function ChatOnline ({ onlineUsers, currentId, setCurrentChat, conversations, se
   const handleClick = async (user) => {
     try {
       const res = await apiUrl.get(`conversations/find/${currentId}/${user.id}`)
-      console.log(res.data)
       setCurrentChat(res.data)
 
       if (!isInConversations(res.data)) {

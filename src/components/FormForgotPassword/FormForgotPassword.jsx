@@ -17,9 +17,7 @@ export default function FormForgotPassword () {
     validationSchema: schemaValidateEmail,
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log(values)
         const response = await apiUrl.post('users/forgotPassword', values)
-        console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)
           setError(true)

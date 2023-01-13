@@ -23,7 +23,6 @@ export default function Card ({ id, title, name, image, price, userId, stock, co
   }
 
   const addToCarrito = (id, price, title, image, name, count) => {
-    console.log(price)
     window.localStorage.setItem(id, JSON.stringify({ price, title, image, name, count: 1, stock: count }))
     dispatch(addCarrito({ id, price, title, image, name, count: 1, stock: count }))
   }

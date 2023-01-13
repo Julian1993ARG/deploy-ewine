@@ -80,8 +80,6 @@ function UsersBarChart ({ users }) {
 
   // filtros acá___________________________________________________
   function handleSort (e) {
-    // console.log(days)
-    // console.log(mesAnterior)
     if (e.target.value === 'meses') {
       setChartData({
         labels: [mesActual - 6, mesActual - 5, mesActual - 4, mesActual - 3, mesActual - 2, mesActual - 1, mesActual],
@@ -133,7 +131,6 @@ function UsersBarChart ({ users }) {
       })
     }
     if (e.target.value === 'dias') {
-      console.log(week)
       setChartData({
         labels: [hoy - 6, hoy - 5, hoy - 4, hoy - 3, hoy - 2, hoy - 1, hoy],
         datasets: [
@@ -246,8 +243,6 @@ export default UsersBarChart
 //   })
 //   const [chartOptions, setChartOptions] = useState({})
 //   function handleSort (e) {
-//     // console.log(days)
-//     // console.log(mesAnterior)
 //     if (e.target.value === 'meses') {
 //       setChartData({
 //         labels: [mesActual - 6, mesActual - 5, mesActual - 4, mesActual - 3, mesActual - 2, mesActual - 1, mesActual],
@@ -299,7 +294,6 @@ export default UsersBarChart
 //       })
 //     }
 //     if (e.target.value === 'dias') {
-//       console.log(week)
 //       setChartData({
 //         labels: [hoy - 6, hoy - 5, hoy - 4, hoy - 3, hoy - 2, hoy - 1, hoy],
 //         datasets: [

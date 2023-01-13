@@ -44,8 +44,6 @@ export const getPublicationsAdm = () => {
 export const bannedPublication = (id, isBanned) => {
   return async function (dispatch) {
     try {
-      console.log(isBanned)
-      console.log('Llegue')
       const res = await apiUrl.put(`publications/${id}?banned=${!isBanned}`)
       console.log(res)
       return dispatch({
@@ -206,21 +204,6 @@ export const getFavorites = (id) => {
   }
 }
 
-export const getPublicationsUserFavorites = (ids) => {
-//   return async function (dispatch) {
-//     try {
-//       // const publications = ids.map(async (idP) => await apiUrl.get(`favorites/${idP}`))
-//       // const api = await apiUrl.get(`favorites/${id}`)
-//       return dispatch({
-//         type: 'GET_PUBLICATIONS_USERFAVORITES',
-//         payload: api.data
-//       })
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-}
-
 export const removePublicationsUserFavorites = (id) => {
   return async function (dispatch) {
     try {
@@ -293,9 +276,7 @@ export const clearCarrito = (id) => {
 export const getRecomendedPublications = (type, varietal, origin) => {
   return async function (dispatch) {
     try {
-      console.log(type, varietal, origin)
       const recPub = await apiUrl(`publications/filter?type=${type || null}&varietal=${varietal || null}&origin=${origin || null}`)
-      console.log(recPub)
       return dispatch({
         type: 'RECOMENDED_PUBLICATIONS',
         payload: recPub.data
@@ -325,7 +306,6 @@ export const getUsers = () => {
   return async function (dispatch) {
     try {
       const res = await apiUrl.get('users')
-      console.log(res.data)
 
       return dispatch({
         type: 'GET_USERS',
@@ -368,7 +348,6 @@ export const usersByProvinces = () => {
   return async function (dispatch) {
     try {
       const res = await apiUrl.get('users/provinces')
-      console.log('esta es la respuesta de la API para las provincias', res)
       return dispatch({
         type: 'GET_USER_PROVINCES',
         payload: res.data
@@ -389,13 +368,11 @@ export const postStripe = (idStripe, totalAmount, carrito, userId) => {
         carrito,
         userId
       })
-      console.log(res)
       return dispatch({
         type: 'POST_STRIPE',
         payload: res.data
       })
     } catch (error) {
-      console.log('Error action post Stripe')
       return dispatch({
         type: 'POST_STRIPE',
         payload: error.response.data
@@ -429,7 +406,6 @@ export const addQuestion = (data) => {
         payload: api.data
       })
     } catch (error) {
-      console.log(error.response)
       throw new Error(error.response.data)
     }
   }
@@ -444,7 +420,6 @@ export const addAnswer = (data, id) => {
         payload: api.data
       })
     } catch (error) {
-      console.log(error.response)
       throw new Error(error.response.data)
     }
   }
@@ -490,7 +465,6 @@ export const getVarietals = () => {
   return async function (dispatch) {
     try {
       const res = await apiUrl.get('varietals')
-      console.log(res.data)
       return dispatch({
         type: 'GET_ALL_VARIETALS',
         payload: res.data
@@ -538,7 +512,6 @@ export const getItemsDetails = (buyId) => {
   return async function (dispatch) {
     try {
       const res = await apiUrl.get(`buyItems/buy/${buyId}`)
-      console.log(res.data)
       return dispatch({
         type: 'GET_ITEMS_DETAIL',
         payload: res.data
@@ -570,7 +543,6 @@ export const deliveryStatus = (deliveryId, status) => {
 // REVIEWSBUYS
 
 export const addReviewBuy = (data) => {
-  console.log(data)
   return async function (dispatch) {
     try {
       const api = await apiUrl.post('reviewsBuys', data)
@@ -697,7 +669,6 @@ export const popularProducts = () => {
   return async function (dispatch) {
     try {
       const res = await apiUrl.get('buyItems/productsCount')
-      console.log('esta es la respuesta de la API para los productos mas vendidos', res)
       return dispatch({
         type: 'GET_POPULAR_PRODUCTS',
         payload: res.data
@@ -726,7 +697,6 @@ export function getReviewsAdmin () {
   return async function (dispatch) {
     try {
       const api = await apiUrl.get('reviews/productsLanding')
-      console.log('Efectivamente son las reseñas', api.data)
       return dispatch({
         type: 'GET_REVIEWS',
         payload: api.data

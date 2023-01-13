@@ -22,7 +22,6 @@ export default function RecoverPassword () {
     onSubmit: async (values, { resetForm }) => {
       try {
         const response = await apiUrl.put(`users/${user.email}`)
-        console.log(response)
         if (typeof response.data === 'string') {
           setMesagge(response.data)
           setError(true)

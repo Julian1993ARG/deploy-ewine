@@ -57,7 +57,6 @@ export default function FormCreatePubli () {
       const urlImage = send.data.secure_url
 
       values.image = urlImage
-      console.log(values)
       dispatch(postPublication({ ...values }, token.token))
       resetForm()
       setSend(true)

@@ -114,9 +114,6 @@ export default UsersByProvincesChart
 //   })
 //   const [chartOptions, setChartOptions] = useState({})
 //   function handleSort () {
-//     console.log(users)
-//     console.log(provincias)
-//     console.log(usuarios)
 //     setChartData({
 //       labels: provincias,
 //       datasets: [

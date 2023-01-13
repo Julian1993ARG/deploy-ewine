@@ -36,7 +36,6 @@ export default function CheckoutForm (props) {
       type: 'card',
       card: elemets.getElement(CardElement)
     })
-    console.log(paymentMethod)
     if (!error) {
       const { id } = paymentMethod
       dispatch(postStripe(id, totalAmount * 100, carrito, user.user.id))
@@ -53,7 +52,6 @@ export default function CheckoutForm (props) {
       }, 4000)
     } else if (Object.keys(buy).length) {
       // const publication = publications.find(p => carrito[0].id === p.id)
-      // console.log(publication)
       // socket.emit('sendBuy', {
       //   senderName: user.username,
       //   receiverId: publication.userId,

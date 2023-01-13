@@ -10,7 +10,6 @@ export default function RecomendedPublications (props) {
   const dispatch = useDispatch()
   const recomendedPublication = useSelector((state) => state.recomendedPublication)
   const { type, varietal, origin } = props
-  console.log(props)
   useEffect(() => {
     dispatch(getRecomendedPublications(type, varietal, origin))
   }, [dispatch, type, varietal, origin])
