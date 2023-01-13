@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import style from './formLogin.module.css'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
@@ -73,18 +74,18 @@ export default function FormLogin () {
       )
   }
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: '299866186395-evt7gful4jbfl5bctqnbp74c9a8i6h88.apps.googleusercontent.com',
-      callback: handleCallbackResponse
-    })
+  // useEffect(() => {
+  //   /* global google */
+  //   google.accounts.id.initialize({
+  //     client_id: '299866186395-evt7gful4jbfl5bctqnbp74c9a8i6h88.apps.googleusercontent.com',
+  //     callback: handleCallbackResponse
+  //   })
 
-    google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
-    )
-  }, [user])//eslint-disable-line
+  //   google.accounts.id.renderButton(
+  //     document.getElementById('signInDiv'),
+  //     { theme: 'outline', size: 'large' }
+  //   )
+  // }, [user])//eslint-disable-line
 
   const { values, handleChange, handleBlur, errors, touched, handleSubmit } = useFormik({ //eslint-disable-line
 
@@ -201,10 +202,10 @@ export default function FormLogin () {
           {err &&
             <div className='alert alert-danger mt-3 text-center' role='alert'><p>{message}</p></div>}
 
-          <div
+          {/* <div
             className={user ? style.googleBtnHide : style.googleBtn}
             id='signInDiv'
-          />
+          /> */}
 
           {success &&
             <div className='alert alert-success mt-3  text-center' role='alert'><p>{message}</p> </div>}
