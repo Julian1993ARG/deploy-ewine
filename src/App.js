@@ -27,8 +27,7 @@ import FormForgotPassword from './components/FormForgotPassword/FormForgotPasswo
 import RecoverPassword from './components/RecoverPassword/RecoverPassword'
 import UserSales from './components/UserSales/UserSales'
 import SommelierReviews from './components/SommelierReviews/SommelierReviews'
-// import ReviewBuy from '../ReviewBuy/ReviewBuy'
-
+import { fakerData } from './data'
 import Cookies from 'universal-cookie'
 
 function App () {
@@ -55,6 +54,7 @@ function App () {
       dispatch(getVarietals())
       dispatch(getVarietals())
     }
+    fakerData()
   }, []) //eslint-disable-line
 
   return (

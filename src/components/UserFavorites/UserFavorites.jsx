@@ -14,15 +14,7 @@ import Navbar from 'react-bootstrap/Navbar' */
 import Sidebar from '../Sidebar/Sidebar'
 
 export default function UserFavorites ({ id }) {
-  // const dispatch = useDispatch()
   const favorites = useSelector(state => state.favorites)
-  // const ids = favorites.map((f) => f.publicationId)
-
-  /* useEffect(() => {
-    dispatch(getPublicationsUserFavorites(ids))
-  }, [dispatch, id]) */
-
-  console.log(favorites)
 
   return (
     <div>
